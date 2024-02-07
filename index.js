@@ -1,5 +1,6 @@
 const { createApp } = Vue;
 import userProductModal from "./userProductModal.js";
+import toastModal from "./toastModal.js";
 // 3.定義規則，全部加入(CDN 版本)
 Object.keys(VeeValidateRules).forEach((rule) => {
   if (rule !== "default") {
@@ -37,6 +38,7 @@ const app = createApp({
       products: [],
       product: {},
       cart: {},
+      toastMessage: '',
     };
   },
   methods: {
@@ -92,7 +94,11 @@ const app = createApp({
       axios
         .post(addToCartUrl, { data: cart })
         .then((res) => {
-          alert(res.data.message);
+          //alert(res.data.message);
+          // console.log("Response data:", res.data);
+          // console.log("Toast modal:", this.$refs.tModal);
+          this.toastMessage = res.data.message; // 將消息賦值給 toastMessage
+          this.$refs.tModal.showToast(); // 顯示 toastModal
           this.loadingStatus.loadingItem = "";
           this.getCart();
         })
@@ -110,7 +116,10 @@ const app = createApp({
       axios
         .put(updateCartUrl, { data: cart })
         .then((res) => {
-          alert(res.data.message);
+          // console.log("Response data:", res.data);
+          // console.log("Toast modal:", this.$refs.tModal);
+          this.toastMessage = res.data.message; // 將消息賦值給 toastMessage
+          this.$refs.tModal.showToast(); // 顯示 toastModal
           this.loadingStatus.loadingItem = "";
           this.getCart();
         })
@@ -168,6 +177,7 @@ const app = createApp({
   },
   components: {
     userProductModal,
+    toastModal
   },
 });
 // 2. 註冊表單驗證元件
