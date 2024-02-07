@@ -38,7 +38,7 @@ const app = createApp({
       products: [],
       product: {},
       cart: {},
-      toastMessage: '',
+      toastMessage: "",
     };
   },
   methods: {
@@ -143,6 +143,13 @@ const app = createApp({
         });
     },
     createOrder() {
+      // 檢查購物車是否為空
+      if (this.cart.carts && this.cart.carts.length === 0) {
+        // 如果購物車為空，顯示通知訊息
+        alert("購物車為空");
+        // 不執行後續的 API 請求
+        return;
+      }
       const createOrderUrl = `${apiUrl}/api/${apiPath}/order`;
       const order = this.form;
       axios
@@ -177,7 +184,7 @@ const app = createApp({
   },
   components: {
     userProductModal,
-    toastModal
+    toastModal,
   },
 });
 // 2. 註冊表單驗證元件
