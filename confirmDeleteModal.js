@@ -1,0 +1,49 @@
+export default {
+  props: ['deleteAllCartItems'],
+  template: ` 
+  <div id="confirmDeleteModal" ref="confirmDeleteModal" class="modal fade" tabindex="-1" aria-labelledby="delProductModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content border-0">
+    <div class="modal-header bg-danger text-white">
+      <h5 id="delProductModalLabel" class="modal-title">
+        <span>清空購物車</span>
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      確認清空購物車 ( 清空後將無法恢復 )。
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+        取消
+      </button>
+      <button type="button" class="btn btn-danger" @click="deleteAllCartItems">
+        確認清空
+      </button>
+    </div>
+  </div>
+</div>
+</div>`,
+  data() {
+    return {
+      confirmDeleteModal: null,
+    };
+  },
+  methods: {
+    showModal() {
+      this.confirmDeleteModal.show();
+    },
+    closeModal() {
+      this.confirmDeleteModal.hide();
+    },
+  },
+  mounted() {
+    this.confirmDeleteModal = new bootstrap.Modal(this.$refs.confirmDeleteModal,
+      {
+        keyboard: false,
+        backdrop: "static",
+      }
+    );
+  },
+};

@@ -21,6 +21,10 @@
           <!-- toastModal -->
           <toast-modal ref="tModal" :message="toastMessage"></toast-modal>
           <!-- toastModal -->
+          <!-- confirmDeleteModal -->
+          <confirm-delete-modal ref="cModal"
+           :delete-all-cart-items="deleteAllCartItems"></confirm-delete-modal>
+          <!-- confirmDeleteModal -->
           <!-- 產品Modal -->
           <user-product-modal
             ref="pModal"
@@ -106,7 +110,7 @@
               <button
                 class="btn btn-outline-danger"
                 type="button"
-                @click="deleteAllCartItems"
+                @click="openModal"
               >
                 清空購物車
               </button>

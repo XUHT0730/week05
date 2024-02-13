@@ -1,6 +1,7 @@
 const { createApp } = Vue;
 import userProductModal from "./userProductModal.js";
 import toastModal from "./toastModal.js";
+import confirmDeleteModal from "./confirmDeleteModal.js";
 // 3.定義規則，全部加入(CDN 版本)
 Object.keys(VeeValidateRules).forEach((rule) => {
   if (rule !== "default") {
@@ -167,13 +168,18 @@ const app = createApp({
           alert(err.response.data.message);
         });
     },
+    openModal(){
+      this.$refs.cModal.showModal();
+    },
     deleteAllCartItems() {
       const deleteAllCartItemsUrl = `${apiUrl}/api/${apiPath}/carts`;
-      axios
-        .delete(deleteAllCartItemsUrl)
+      axios.delete(deleteAllCartItemsUrl)
         .then((res) => {
-          alert(res.data.message);
+          // alert(res.data.message);
           this.getCart();
+          this.$refs.cModal.closeModal();
+          this.toastMessage = res.data.message;
+          this.$refs.tModal.showToast();
         })
         .catch((err) => {
           alert(err.response.data.message);
@@ -187,6 +193,7 @@ const app = createApp({
   components: {
     userProductModal,
     toastModal,
+    confirmDeleteModal,
   },
 });
 // 2. 註冊表單驗證元件
