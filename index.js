@@ -134,7 +134,9 @@ const app = createApp({
       axios
         .delete(deleteCartItemUrl)
         .then((res) => {
-          alert(res.data.message);
+          // alert(res.data.message);
+          this.toastMessage = res.data.message;
+          this.$refs.tModal.showToast();
           this.loadingStatus.loadingItem = "";
           this.getCart();
         })
