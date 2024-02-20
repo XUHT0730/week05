@@ -5,7 +5,7 @@ export default {
     };
   },
   props: ["message"],
-  template: `<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100"> 
+  template: `<div aria-live="polite" aria-atomic="true" class="position-fixed d-flex justify-content-center align-items-center w-100"> 
     <div ref="toastModal" class="toast align-items-center text-white bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
     <div class="d-flex">
       <div class="toast-body">
